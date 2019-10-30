@@ -1,5 +1,6 @@
 package com.es.core.model.phone;
 
+import com.es.core.model.color.Color;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -13,17 +14,15 @@ public class JdbcPhoneDao implements PhoneDao {
                     "values " +
                     "(:brand, :model, :price, :displaySizeInches, :weightGr, :lengthMm, :widthMm, :heightMm, :announced, :deviceType, :os, :displayResolution, :pixelDensity, :displayTechnology, :backCameraMegapixels, :frontCameraMegapixels, :ramGb, :internalStorageGb, :batteryCapacityMah, :talkTimeHours, :standByTimeHours, :bluetooth, :positioning, :imageUrl, :description)";
     private static final String SQL_SAVE_COLORS = "insert into phone2color (code, id) values (?, ?)";
-    private static final String SQL_GET_PHONES_WITH_COLORS = "select * from colors where id in (select * from phone2color where phoneId = ?)";
-    private static final String SQL_GET_ALL_PHONES_WITH_COLORS = "select * from city c left join brand n on c.id = n.id order by brand";
+    private static final String SQL_GET_PHONE_BY_ID = "select * from phones where id = ?";
+    private static final String SQL_GET_ALL_PHONES = "select * from phones";
     @Resource
     private JdbcTemplate jdbcTemplate;
 
     public Optional<Phone> get(final Long key) {
-        List<Phone> phones = jdbcTemplate.query(SQL_GET_PHONES_WITH_COLORS, new Object[]{key}, new PhoneResultSetExtractor());
-        if (phones.isEmpty()) {
-            throw new NoSuchElementException("Don't have phone with id " + key);
-        }
-        return Optional.of(phones.get(0));
+        List<Phone> phones = jdbcTemplate.query(SQL_GET_PHONE_BY_ID, new Object[]{key}, new PhoneRowMapper());
+
+        return phones.stream().findFirst();
     }
 
     public void save(final Phone phone) {
@@ -32,7 +31,7 @@ public class JdbcPhoneDao implements PhoneDao {
         }
         Set<Color> colors = phone.getColors();
 
-        colors.stream().forEach(color -> jdbcTemplate.update(SQL_SAVE_COLORS, color.getId(), color.getCode()));
+        colors.forEach(color -> jdbcTemplate.update(SQL_SAVE_COLORS, color.getId(), color.getCode()));
 
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("brand", phone.getBrand());
@@ -65,6 +64,6 @@ public class JdbcPhoneDao implements PhoneDao {
     }
 
     public List<Phone> findAll(int offset, int limit) {
-        return jdbcTemplate.query(SQL_GET_ALL_PHONES_WITH_COLORS + " offset " + offset + " limit " + limit, new PhoneResultSetExtractor());
+        return jdbcTemplate.query(SQL_GET_ALL_PHONES + " offset " + offset + " limit " + limit, new PhoneRowMapper());
     }
 }
