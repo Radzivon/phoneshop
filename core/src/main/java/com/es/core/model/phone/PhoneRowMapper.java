@@ -46,8 +46,8 @@ public class PhoneRowMapper implements RowMapper<Phone> {
         phone.setImageUrl(resultSet.getString("imageUrl"));
         phone.setDescription(resultSet.getString("description"));
 
-//        Set<Color> colors = colorDao.getColorsForPhoneById(phone.getId()).stream().collect(Collectors.toSet());
-//        phone.setColors(colors);
+        Set<Color> colors = colorDao.getColorsForPhoneById(phone.getId()).stream().collect(Collectors.toSet());
+        phone.setColors(colors);
 
         return phone;
     }

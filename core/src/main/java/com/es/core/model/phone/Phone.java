@@ -60,6 +60,39 @@ public class Phone {
 
     private String description;
 
+    public Phone() {
+    }
+
+    public Phone(Long id, String brand, String model, BigDecimal price, BigDecimal displaySizeInches, Integer weightGr, BigDecimal lengthMm, BigDecimal widthMm, BigDecimal heightMm, Date announced, String deviceType, String os, Set<Color> colors, String displayResolution, Integer pixelDensity, String displayTechnology, BigDecimal backCameraMegapixels, BigDecimal frontCameraMegapixels, BigDecimal ramGb, BigDecimal internalStorageGb, Integer batteryCapacityMah, BigDecimal talkTimeHours, BigDecimal standByTimeHours, String bluetooth, String positioning, String imageUrl, String description) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.price = price;
+        this.displaySizeInches = displaySizeInches;
+        this.weightGr = weightGr;
+        this.lengthMm = lengthMm;
+        this.widthMm = widthMm;
+        this.heightMm = heightMm;
+        this.announced = announced;
+        this.deviceType = deviceType;
+        this.os = os;
+        this.colors = colors;
+        this.displayResolution = displayResolution;
+        this.pixelDensity = pixelDensity;
+        this.displayTechnology = displayTechnology;
+        this.backCameraMegapixels = backCameraMegapixels;
+        this.frontCameraMegapixels = frontCameraMegapixels;
+        this.ramGb = ramGb;
+        this.internalStorageGb = internalStorageGb;
+        this.batteryCapacityMah = batteryCapacityMah;
+        this.talkTimeHours = talkTimeHours;
+        this.standByTimeHours = standByTimeHours;
+        this.bluetooth = bluetooth;
+        this.positioning = positioning;
+        this.imageUrl = imageUrl;
+        this.description = description;
+    }
+
     public String getBrand() {
         return brand;
     }
@@ -281,15 +314,19 @@ public class Phone {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Phone phone = (Phone) o;
-        return Objects.equals(brand, phone.brand) &&
+        return Objects.equals(id, phone.id) &&
+                Objects.equals(brand, phone.brand) &&
                 Objects.equals(model, phone.model) &&
+                Objects.equals(price, phone.price) &&
                 Objects.equals(displaySizeInches, phone.displaySizeInches) &&
                 Objects.equals(weightGr, phone.weightGr) &&
                 Objects.equals(lengthMm, phone.lengthMm) &&
                 Objects.equals(widthMm, phone.widthMm) &&
                 Objects.equals(heightMm, phone.heightMm) &&
+                Objects.equals(announced, phone.announced) &&
                 Objects.equals(deviceType, phone.deviceType) &&
                 Objects.equals(os, phone.os) &&
+                Objects.equals(colors, phone.colors) &&
                 Objects.equals(displayResolution, phone.displayResolution) &&
                 Objects.equals(pixelDensity, phone.pixelDensity) &&
                 Objects.equals(displayTechnology, phone.displayTechnology) &&
@@ -307,7 +344,40 @@ public class Phone {
     }
 
     @Override
+    public String toString() {
+        return "Phone{" +
+                "id=" + id +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", price=" + price +
+                ", displaySizeInches=" + displaySizeInches +
+                ", weightGr=" + weightGr +
+                ", lengthMm=" + lengthMm +
+                ", widthMm=" + widthMm +
+                ", heightMm=" + heightMm +
+                ", announced=" + announced +
+                ", deviceType='" + deviceType + '\'' +
+                ", os='" + os + '\'' +
+                ", colors=" + colors +
+                ", displayResolution='" + displayResolution + '\'' +
+                ", pixelDensity=" + pixelDensity +
+                ", displayTechnology='" + displayTechnology + '\'' +
+                ", backCameraMegapixels=" + backCameraMegapixels +
+                ", frontCameraMegapixels=" + frontCameraMegapixels +
+                ", ramGb=" + ramGb +
+                ", internalStorageGb=" + internalStorageGb +
+                ", batteryCapacityMah=" + batteryCapacityMah +
+                ", talkTimeHours=" + talkTimeHours +
+                ", standByTimeHours=" + standByTimeHours +
+                ", bluetooth='" + bluetooth + '\'' +
+                ", positioning='" + positioning + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
-        return Objects.hash(brand, model, displaySizeInches, weightGr, lengthMm, widthMm, heightMm, deviceType, os, displayResolution, pixelDensity, displayTechnology, backCameraMegapixels, frontCameraMegapixels, ramGb, internalStorageGb, batteryCapacityMah, talkTimeHours, standByTimeHours, bluetooth, positioning, imageUrl, description);
+        return Objects.hash(id, brand, model, price, displaySizeInches, weightGr, lengthMm, widthMm, heightMm, announced, deviceType, os, colors, displayResolution, pixelDensity, displayTechnology, backCameraMegapixels, frontCameraMegapixels, ramGb, internalStorageGb, batteryCapacityMah, talkTimeHours, standByTimeHours, bluetooth, positioning, imageUrl, description);
     }
 }
