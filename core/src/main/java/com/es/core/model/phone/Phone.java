@@ -63,8 +63,7 @@ public class Phone {
     public Phone() {
     }
 
-    public Phone(Long id, String brand, String model, BigDecimal price, BigDecimal displaySizeInches, Integer weightGr, BigDecimal lengthMm, BigDecimal widthMm, BigDecimal heightMm, Date announced, String deviceType, String os, Set<Color> colors, String displayResolution, Integer pixelDensity, String displayTechnology, BigDecimal backCameraMegapixels, BigDecimal frontCameraMegapixels, BigDecimal ramGb, BigDecimal internalStorageGb, Integer batteryCapacityMah, BigDecimal talkTimeHours, BigDecimal standByTimeHours, String bluetooth, String positioning, String imageUrl, String description) {
-        this.id = id;
+    public Phone( String brand, String model, BigDecimal price, BigDecimal displaySizeInches, Integer weightGr, BigDecimal lengthMm, BigDecimal widthMm, BigDecimal heightMm, Date announced, String deviceType, String os, Set<Color> colors, String displayResolution, Integer pixelDensity, String displayTechnology, BigDecimal backCameraMegapixels, BigDecimal frontCameraMegapixels, BigDecimal ramGb, BigDecimal internalStorageGb, Integer batteryCapacityMah, BigDecimal talkTimeHours, BigDecimal standByTimeHours, String bluetooth, String positioning, String imageUrl, String description) {
         this.brand = brand;
         this.model = model;
         this.price = price;
@@ -342,6 +341,10 @@ public class Phone {
                 Objects.equals(imageUrl, phone.imageUrl) &&
                 Objects.equals(description, phone.description);
     }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, brand, model, price, displaySizeInches, weightGr, lengthMm, widthMm, heightMm, announced, deviceType, os, colors, displayResolution, pixelDensity, displayTechnology, backCameraMegapixels, frontCameraMegapixels, ramGb, internalStorageGb, batteryCapacityMah, talkTimeHours, standByTimeHours, bluetooth, positioning, imageUrl, description);
+    }
 
     @Override
     public String toString() {
@@ -374,10 +377,5 @@ public class Phone {
                 ", imageUrl='" + imageUrl + '\'' +
                 ", description='" + description + '\'' +
                 '}';
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, brand, model, price, displaySizeInches, weightGr, lengthMm, widthMm, heightMm, announced, deviceType, os, colors, displayResolution, pixelDensity, displayTechnology, backCameraMegapixels, frontCameraMegapixels, ramGb, internalStorageGb, batteryCapacityMah, talkTimeHours, standByTimeHours, bluetooth, positioning, imageUrl, description);
     }
 }
